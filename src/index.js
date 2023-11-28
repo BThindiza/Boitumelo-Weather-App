@@ -21,4 +21,33 @@
 
     getForecast(response.data.city);
  }
+ function formatDate(timestamp){
+   let minutes =date.getMinutes();
+   let hours = date.getHours();
+   let days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+   let day = days[date.getDay()];
+   return `${day} ${hours}:${minutes}`;
+ }
+
+ function searchCity(city){
+   let apiKey = "3t1a5685d95o5fd95bdaaac3a43d5083";
+   let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+   axios.get(apiUrl).then(refreshWeather);
+ }
+  function handleSearchSubmit(event){
+   event.preventDefault();
+   let searchInput = document.querySelector("#search-form-input");
+   searchCity(searchInput.value);
+ }
+
+ function formatDate(){
+   let date = new Date(timestamp*1000);
+   let days = ["Sun","Mon","Tue","Wed","Thur","Fri","Sat"];
+   return days[date.getDay()];
+ }
+ function getForecast(city){
+   let apiKey = "3t1a5685d95o5fd95bdaaac3a43d5083";
+   let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
+axios(apiUrl).then(displayForecast); 
+}
  
