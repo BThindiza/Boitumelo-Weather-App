@@ -1,8 +1,8 @@
- function refreshWeather(){
+ function refreshWeather(response){
     let tempratureElement = document.querySelector("#temperature");
     let temperature = response.data.temperature.current;
     let cityElement = document.querySelector("#city");
-    let desciptionElement = document.querySelector("#weather-description");
+    let descriptionElement = document.querySelector("#weather-description");
     let humidityElement = document.querySelector("#humidity");
     let windElement = document.querySelector("#wind");
     let percipitationElement = document.querySelector("#percipitation");
@@ -12,16 +12,16 @@
 
     tempratureElement.innerHTML = Math.round(temperature);
     cityElement.innerHTML = response.data.city;
-    desciptionElement.innerHTML = response.data.condition.desciption;
+    descriptionElement.innerHTML =response.data.condition.description;
     humidityElement.innerHTML =`${response.data.temperature.humidity}%`;
     windElement.innerHTML = `${response.data.wind.speed}km/h`;
-    percipitationElement.innerHTML =`${response.data.percipitation.rain}%`;
-    timeElement.innerHTML =formatDate(date);
+    percipitationElement.innerHTML =`${response.data.percipitation}%`;
+    timeElement.innerHTML = formatDate(date);
     iconElement.innerHTML =`<img src ="${response.data.condition.icon_url}"class="weather-icon"/>`;
 
     getForecast(response.data.city);
  }
- function formatDate(timestamp){
+ function formatDate(date){
    let minutes =date.getMinutes();
    let hours = date.getHours();
    let days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
@@ -40,8 +40,8 @@
    searchCity(searchInput.value);
  }
 
- function formatDate(){
-   let date = new Date(timestamp*1000);
+ function formatDay(timestamp){
+   let date = new Date(timestamp * 1000);
    let days = ["Sun","Mon","Tue","Wed","Thur","Fri","Sat"];
    return days[date.getDay()];
  }
@@ -50,4 +50,29 @@
    let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
 axios(apiUrl).then(displayForecast); 
 }
- 
+function displayForecast(response){
+let forecastHtml ="";
+response.data.daily.forEach(function(day,index){
+  if (index < 5){
+    forecastHtml = forecastHtml + `<div class="weather-forecast-day">
+    <div class="weather-forecast-date">${formatDay(day.time)}</div>
+    <img src="${day.condition.icon_url}" class="weather-forecast-icon"/>
+    <div class="weather-forecast-temperatures">
+    <div class="weather-forecast-temperature">
+    <strong>${Math.round(day.temperature.maximum)}º</strong>
+    </div>
+    <strong>${Math.round(day.temperature.minimum)}º</strong>
+    </div>
+    </div>
+    </div>
+    `;
+  }
+});
+let forecastElement = document.querySelector("#forecast-weather");
+forecastElement.innerHTML= forecastHtml;
+}
+
+let searchFormElement = document.querySelector("#search-form");
+searchFormElement.addEventListener("submit",handleSearchSubmit);
+
+searchCity("Polokwane");
