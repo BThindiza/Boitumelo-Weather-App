@@ -34,3 +34,47 @@ li:first-letter{
     display: flex;
     align-items: center;
 }
+.weather-icons{
+    height: 64px;
+    width: 64px;
+    margin-right: 10px;
+}
+.temperature{
+    color: rgb(33,33,33);
+    font-size:64px ;
+    font-weight: 400;
+    line-height: 1;
+    margin-right: 5px;
+}
+.units{
+    position: relative;
+    top: -18px;
+}
+.weather-forecast{
+margin-top: 20px;
+text-align: center;
+color: #000;
+}
+.weather-forecast-date{
+    text-align: center;
+    color: rgba(39,33,65,0.4);
+    font-size: 16px;
+    line-height: 20px;
+    margin-bottom: 10px;
+}
+.weather-forecast-icon{
+    width: 88px;
+    height: 88px;
+    display: block;
+    margin: 0 auto;
+}
+.weather-forecast-temperatures{
+    text-align: center;
+    color: #f65328;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+.weather-forecast-temperature{
+    padding: 0 10px;
+}
