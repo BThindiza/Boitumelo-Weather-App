@@ -24,7 +24,7 @@ li:first-letter{
     text-transform: capitalize;
 }
 .weather-app{
-    border: 3px solid #7c7c7c;
+    border: 3px solid #9191915d;
     padding: 15px;
     margin: 20px auto;
     border-radius: 10px;
@@ -34,11 +34,12 @@ header {
     border-bottom: 1px solid #f9f7fe;
     padding: 0 0 30px 0;
   }
+
   .search-form-input {
     background-color: #f9f7fe;
     border: none;
     border-radius: 6px;
-    width: 75%;
+    width: 85%;
     font-size: 16px;
     padding: 15px 20px;
   }
@@ -51,6 +52,7 @@ header {
     margin-left: 5px;
     border-radius: 6px;
     color: white;
+   
   }
   main {
     padding: 30px 0;
